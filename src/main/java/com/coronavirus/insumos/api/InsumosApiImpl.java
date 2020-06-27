@@ -180,6 +180,12 @@ public class InsumosApiImpl implements InsumosApi {
 			return Response.status(400).entity(objectNode.toString()).build();
 		}
 	}
+
+	@Override
+	public Response obtenerTodosLosTickets() {
+		List<Ticket> tickets = this.ticketService.obtenerTodos();
+		return Response.status(200).entity(tickets).build();
+	}
 	
 	
 	

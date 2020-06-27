@@ -93,5 +93,11 @@ public class TicketServiceImpl implements TicketService{
 		}
 	}
 
+	@Override
+	public List<Ticket> obtenerTodos() {
+		List<Ticket> tickets = (List<Ticket>) ticketRepository.findAll();
+		return tickets;
+	}
+
 
 }

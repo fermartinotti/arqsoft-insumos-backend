@@ -19,4 +19,6 @@ public interface TicketService {
 	public Ticket cancelarTicket(Long id, Usuario usuario);
 	
 	public Ticket rechazarTicket(Long id, String motivo);
+	
+	public List<Ticket> obtenerTodos();
 }

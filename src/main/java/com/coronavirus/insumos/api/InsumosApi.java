@@ -74,6 +74,12 @@ public interface InsumosApi {
 	@Produces(MediaType.APPLICATION_JSON)
 	Response obtenerProveedores();
 	
+	@GET
+	@Path("/ticket/todos")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Produces(MediaType.APPLICATION_JSON)
+	Response obtenerTodosLosTickets();
+	
 	// AprobarTickjet (ticketid, proveedor).
 
 }
