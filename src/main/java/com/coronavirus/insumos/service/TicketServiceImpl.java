@@ -15,6 +15,7 @@ import com.coronavirus.insumos.modelo.Cancelado;
 import com.coronavirus.insumos.modelo.Enviado;
 import com.coronavirus.insumos.modelo.EstadoTicket;
 import com.coronavirus.insumos.modelo.Insumo;
+import com.coronavirus.insumos.modelo.Rechazado;
 import com.coronavirus.insumos.modelo.Ticket;
 import com.coronavirus.insumos.modelo.Usuario;
 import com.coronavirus.insumos.repository.EstadoTicketRepository;
@@ -73,6 +74,20 @@ public class TicketServiceImpl implements TicketService{
 			}else {
 				throw new TicketInvalidoException("El ticket no pertenece a este cliente");
 			}			
+		}else {
+			throw new TicketInvalidoException("El ticket es inexistente");	
+		}
+	}
+	
+	public Ticket rechazarTicket(Long id, String motivo) {
+		Optional<Ticket> OptTicket = this.getTicketById(id);
+		if (OptTicket.isPresent()) {
+			Ticket ticket = OptTicket.get();
+			EstadoTicket rechazado = new Rechazado(motivo);
+			estadoTicketRepository.save(rechazado);
+			ticket.setEstado(rechazado);
+			ticketRepository.save(ticket);
+			return ticket;
 		}else {
 			throw new TicketInvalidoException("El ticket es inexistente");	
 		}
