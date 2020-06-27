@@ -45,4 +45,8 @@ public class Proveedor extends AbstractPersistable<Long> {
 	}
 	
 	public Proveedor(){}
+	
+	public Proveedor(String nombre) {
+		this.nombre = nombre;
+	}
 }
