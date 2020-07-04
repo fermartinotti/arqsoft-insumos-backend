@@ -9,6 +9,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.coronavirus.insumos.dto.AprobarTicketRequest;
 import com.coronavirus.insumos.dto.CancelarTicketRequest;
 import com.coronavirus.insumos.dto.CrearTicketDTO;
 import com.coronavirus.insumos.dto.LoginRequest;
@@ -185,6 +186,24 @@ public class InsumosApiImpl implements InsumosApi {
 	public Response obtenerTodosLosTickets() {
 		List<Ticket> tickets = this.ticketService.obtenerTodos();
 		return Response.status(200).entity(tickets).build();
+	}
+
+	@Override
+	public Response obtenerTicketsEnviados() {
+		List<Ticket> tickets = this.ticketService.obtenerTicketsEnviados();
+		return Response.status(200).entity(tickets).build();
+	}
+
+	@Override
+	public Response aprobarTicket(AprobarTicketRequest request) {
+		ObjectNode objectNode = new ObjectMapper().createObjectNode();
+		try {
+			Ticket ticket = ticketService.AprobarTicket(request.getTicketId(), request.getProveedorId());
+			return Response.ok(ticket).build();
+		} catch (Exception e) {
+			objectNode.put("Error ", e.getMessage());
+			return Response.status(400).entity(objectNode.toString()).build();
+		}
 	}
 	
 	

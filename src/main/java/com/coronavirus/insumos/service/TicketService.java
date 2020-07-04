@@ -21,4 +21,8 @@ public interface TicketService {
 	public Ticket rechazarTicket(Long id, String motivo);
 	
 	public List<Ticket> obtenerTodos();
+	
+	public List<Ticket> obtenerTicketsEnviados();
+
+	public Ticket AprobarTicket(Long ticketId, Long proveedorId);
 }

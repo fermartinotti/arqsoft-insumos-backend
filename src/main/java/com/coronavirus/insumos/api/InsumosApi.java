@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
+import com.coronavirus.insumos.dto.AprobarTicketRequest;
 import com.coronavirus.insumos.dto.CancelarTicketRequest;
 import com.coronavirus.insumos.dto.CrearTicketDTO;
 import com.coronavirus.insumos.dto.LoginRequest;
@@ -80,6 +81,17 @@ public interface InsumosApi {
 	@Produces(MediaType.APPLICATION_JSON)
 	Response obtenerTodosLosTickets();
 	
-	// AprobarTickjet (ticketid, proveedor).
+	@GET
+	@Path("/ticket/enviados")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Produces(MediaType.APPLICATION_JSON)
+	Response obtenerTicketsEnviados();
+	
+	@POST
+	@Path("/ticket/aprobar")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Produces(MediaType.APPLICATION_JSON)
+	Response aprobarTicket(AprobarTicketRequest request);
+	
 
 }
