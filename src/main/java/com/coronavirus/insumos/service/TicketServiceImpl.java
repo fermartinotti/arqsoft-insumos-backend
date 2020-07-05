@@ -141,8 +141,9 @@ public class TicketServiceImpl implements TicketService{
 	
 	private EstadoTicket obtenerUltimoEstado(Ticket ticket){
 		List<EstadoTicket> estados = ticket.getEstados();
-		Collections.reverse(estados);
-		return estados.get(0);
+		ArrayList<EstadoTicket> retorno = new ArrayList<EstadoTicket>(estados);
+		Collections.reverse(retorno);
+		return retorno.get(0);
 	}
 
 	private boolean esTicketValidoParaAprobar(Ticket ticket) {
