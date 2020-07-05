@@ -150,4 +150,15 @@ public class TicketServiceImpl implements TicketService{
 		return (estadoActual instanceof Enviado);
 	}
 
+	@Override
+	public List<Ticket> obtenerTicketsRechazados() {
+		List<Ticket> tickets = (List<Ticket>) ticketRepository.findAll();
+		List<Ticket> retorno = new ArrayList<Ticket>();
+		for(Ticket ticket : tickets) {
+			EstadoTicket estadoActual = this.obtenerUltimoEstado(ticket);
+			if (estadoActual instanceof Rechazado) retorno.add(ticket);
+		}
+		return retorno;
+	}
+
 }

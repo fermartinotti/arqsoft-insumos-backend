@@ -87,6 +87,12 @@ public interface InsumosApi {
 	@Produces(MediaType.APPLICATION_JSON)
 	Response obtenerTicketsEnviados();
 	
+	@GET
+	@Path("/ticket/rechazados")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Produces(MediaType.APPLICATION_JSON)
+	Response obtenerTicketsRechazados();
+	
 	@POST
 	@Path("/ticket/aprobar")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

@@ -25,4 +25,6 @@ public interface TicketService {
 	public List<Ticket> obtenerTicketsEnviados();
 
 	public Ticket AprobarTicket(Long ticketId, Long proveedorId);
+
+	public List<Ticket> obtenerTicketsRechazados();
 }
