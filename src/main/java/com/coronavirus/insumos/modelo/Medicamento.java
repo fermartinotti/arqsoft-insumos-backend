@@ -22,4 +22,8 @@ public class Medicamento extends Insumo {
 	}
 
 	public Medicamento(){};
+	
+	public Medicamento(String medicamento) {
+		this.nombre= medicamento;
+	}
 }

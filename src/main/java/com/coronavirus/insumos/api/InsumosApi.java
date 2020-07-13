@@ -1,21 +1,20 @@
 package com.coronavirus.insumos.api;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
+import com.coronavirus.insumos.dto.AprobarTicketRequest;
 import com.coronavirus.insumos.dto.CancelarTicketRequest;
 import com.coronavirus.insumos.dto.CrearTicketDTO;
 import com.coronavirus.insumos.dto.LoginRequest;
+import com.coronavirus.insumos.dto.RechazarTicketRequest;
 import com.coronavirus.insumos.modelo.Usuario;
 
 @Path("insumos")
@@ -58,14 +57,47 @@ public interface InsumosApi {
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@Produces(MediaType.APPLICATION_JSON)
 	Response cancelarTicket(CancelarTicketRequest request);
-
+	
 	@GET
 	@Path("/ticket/areas")
 	@Produces(MediaType.APPLICATION_JSON)
 	Response obtenerAreas();
 	
-	// rechazarTicket (Ticket id)
-	// AprobarTickjet (ticketid, proveedor).
-	// listaProveedores();
+	@POST
+	@Path("/ticket/rechazarTicket")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Produces(MediaType.APPLICATION_JSON)
+	Response cancelarTicket(RechazarTicketRequest request);
+	
+	@GET
+	@Path("/proveedores/")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Produces(MediaType.APPLICATION_JSON)
+	Response obtenerProveedores();
+	
+	@GET
+	@Path("/ticket/todos")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Produces(MediaType.APPLICATION_JSON)
+	Response obtenerTodosLosTickets();
+	
+	@GET
+	@Path("/ticket/enviados")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Produces(MediaType.APPLICATION_JSON)
+	Response obtenerTicketsEnviados();
+	
+	@GET
+	@Path("/ticket/rechazados")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Produces(MediaType.APPLICATION_JSON)
+	Response obtenerTicketsRechazados();
+	
+	@POST
+	@Path("/ticket/aprobar")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Produces(MediaType.APPLICATION_JSON)
+	Response aprobarTicket(AprobarTicketRequest request);
+	
 
 }

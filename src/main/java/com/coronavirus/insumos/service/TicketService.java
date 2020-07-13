@@ -17,4 +17,14 @@ public interface TicketService {
 	public Optional<Ticket> getTicketById(Long id);
 	
 	public Ticket cancelarTicket(Long id, Usuario usuario);
+	
+	public Ticket rechazarTicket(Long id, String motivo);
+	
+	public List<Ticket> obtenerTodos();
+	
+	public List<Ticket> obtenerTicketsEnviados();
+
+	public Ticket AprobarTicket(Long ticketId, Long proveedorId);
+
+	public List<Ticket> obtenerTicketsRechazados();
 }

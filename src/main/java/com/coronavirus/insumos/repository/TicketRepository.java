@@ -12,4 +12,7 @@ public interface TicketRepository extends CrudRepository<Ticket, Long>{
 
 	@Query("SELECT t FROM Ticket t where t.cliente =?1")
 	public List<Ticket> obtenerTicketByUsuario(Usuario usuario);
+	
+	//@Query("SELECT t FROM Ticket t JOIN t.estados e where e = 'Enviado'")
+	//public List<Ticket >obtenerTicketsEnviados();
 }

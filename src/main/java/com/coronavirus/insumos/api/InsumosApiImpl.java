@@ -9,17 +9,21 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.coronavirus.insumos.dto.AprobarTicketRequest;
 import com.coronavirus.insumos.dto.CancelarTicketRequest;
 import com.coronavirus.insumos.dto.CrearTicketDTO;
 import com.coronavirus.insumos.dto.LoginRequest;
 import com.coronavirus.insumos.dto.LoginResponse;
+import com.coronavirus.insumos.dto.RechazarTicketRequest;
 import com.coronavirus.insumos.modelo.Area;
 import com.coronavirus.insumos.modelo.Insumo;
+import com.coronavirus.insumos.modelo.Proveedor;
 import com.coronavirus.insumos.modelo.Ticket;
 import com.coronavirus.insumos.modelo.Usuario;
 import com.coronavirus.insumos.repository.InsumoRepository;
 import com.coronavirus.insumos.service.AreaService;
 import com.coronavirus.insumos.service.AuthService;
+import com.coronavirus.insumos.service.ProveedorService;
 import com.coronavirus.insumos.service.TicketService;
 import com.coronavirus.insumos.service.UsuarioService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,6 +49,9 @@ public class InsumosApiImpl implements InsumosApi {
 	
 	@Autowired
 	private AreaService areaService;
+	
+	@Autowired
+	private ProveedorService proveedorService;
 	
 	@Autowired
 	HttpServletRequest request;
@@ -149,6 +156,60 @@ public class InsumosApiImpl implements InsumosApi {
 	public Response obtenerAreas() {
 		List<Area> areas = this.areaService.obtenerAreas();
 		return Response.status(200).entity(areas).build();
+	}
+
+	@Override
+	public Response cancelarTicket(RechazarTicketRequest request) {
+		ObjectNode objectNode = new ObjectMapper().createObjectNode();
+		try {
+			Ticket ticket = ticketService.rechazarTicket(request.getIdTicket(), request.getMotivo());
+			return Response.ok(ticket).build();
+		} catch (Exception e) {
+			objectNode.put("Error ", e.getMessage());
+			return Response.status(400).entity(objectNode.toString()).build();
+		}
+	}
+
+	@Override
+	public Response obtenerProveedores() {
+		ObjectNode objectNode = new ObjectMapper().createObjectNode();
+		try {
+			List<Proveedor> proveedores = proveedorService.obtenerProveedores();
+			return Response.ok(proveedores).build();
+		} catch (Exception e) {
+			objectNode.put("Error ", e.getMessage());
+			return Response.status(400).entity(objectNode.toString()).build();
+		}
+	}
+
+	@Override
+	public Response obtenerTodosLosTickets() {
+		List<Ticket> tickets = this.ticketService.obtenerTodos();
+		return Response.status(200).entity(tickets).build();
+	}
+
+	@Override
+	public Response obtenerTicketsEnviados() {
+		List<Ticket> tickets = this.ticketService.obtenerTicketsEnviados();
+		return Response.status(200).entity(tickets).build();
+	}
+
+	@Override
+	public Response aprobarTicket(AprobarTicketRequest request) {
+		ObjectNode objectNode = new ObjectMapper().createObjectNode();
+		try {
+			Ticket ticket = ticketService.AprobarTicket(request.getTicketId(), request.getProveedorId());
+			return Response.ok(ticket).build();
+		} catch (Exception e) {
+			objectNode.put("Error ", e.getMessage());
+			return Response.status(400).entity(objectNode.toString()).build();
+		}
+	}
+
+	@Override
+	public Response obtenerTicketsRechazados() {
+		List<Ticket> tickets = this.ticketService.obtenerTicketsRechazados();
+		return Response.status(200).entity(tickets).build();
 	}
 	
 	
