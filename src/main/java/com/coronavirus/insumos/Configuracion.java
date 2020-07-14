@@ -72,7 +72,7 @@ public class Configuracion extends WebSecurityConfigurerAdapter {
 			.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
 			.antMatchers("/insumos/auth/**").permitAll()
-			.antMatchers("/insumos/ticket/areas").permitAll()
+			.antMatchers("/insumos/**").permitAll()
 			.anyRequest().authenticated();
 	}
 	
