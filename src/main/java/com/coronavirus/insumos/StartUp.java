@@ -64,13 +64,13 @@ public class StartUp implements ApplicationRunner {
 		InsumoRepository.save(medicamento);
 		
 		//Creo proveedores
-		Proveedor proveedor1 = new Proveedor("Proveedor 1");
+		Proveedor proveedor1 = new Proveedor("Proveedor de barbijo");
 		proveedor1.setInsumo(barbijo);
-		Proveedor proveedor2 = new Proveedor("Proveedor 2");
+		Proveedor proveedor2 = new Proveedor("Proveedor de guantes");
 		proveedor2.setInsumo(guante);
-		Proveedor proveedor3 = new Proveedor("Proveedor 3");
+		Proveedor proveedor3 = new Proveedor("Proveedor de mascaras");
 		proveedor3.setInsumo(mascara);
-		Proveedor proveedor4 = new Proveedor("Proveedor 4");
+		Proveedor proveedor4 = new Proveedor("Proveedor de insumos/medicamentos/mascaras");
 		proveedor4.setInsumo(medicamento);
 		proveedor4.setInsumo(mascara);
 		
