@@ -20,6 +20,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.coronavirus.insumos.api.InsumosApi;
 import com.coronavirus.insumos.utils.JWTAuthorizationFilter;
@@ -69,4 +71,14 @@ public class Configuracion extends WebSecurityConfigurerAdapter {
 			.antMatchers("/insumos/ticket/areas").permitAll()
 			.anyRequest().authenticated();
 	}
+	
+	@Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST","PUT", "DELETE");
+            }
+        };
+    }
 }
