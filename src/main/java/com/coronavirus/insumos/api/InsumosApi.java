@@ -20,15 +20,7 @@ import com.coronavirus.insumos.dto.RechazarTicketRequest;
 import com.coronavirus.insumos.modelo.Usuario;
 
 @Path("insumos")
-@CrossOriginResourceSharing(allowAllOrigins = true, allowCredentials = true, 
-exposeHeaders = {"Access-Control-Allow-Headers",
-	        "Origin", "Content-Type", "X-Requested-With", "accept", 
-	        "Access-Control-Request-Method", "Access-Control-Request-Headers", 
-	        "Authorization"},
-allowHeaders = {"Access-Control-Allow-Headers",
-	        "Origin", "Content-Type", "X-Requested-With", "accept", 
-	        "Access-Control-Request-Method", "Access-Control-Request-Headers", 
-	        "Authorization"})
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public interface InsumosApi {
 
 	@GET
