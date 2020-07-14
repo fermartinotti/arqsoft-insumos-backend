@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.coronavirus.insumos.dto.AprobarTicketRequest;
 import com.coronavirus.insumos.dto.CancelarTicketRequest;
@@ -18,7 +19,7 @@ import com.coronavirus.insumos.dto.RechazarTicketRequest;
 import com.coronavirus.insumos.modelo.Usuario;
 
 @Path("insumos")
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public interface InsumosApi {
 
 	@GET
@@ -50,6 +51,7 @@ public interface InsumosApi {
 	@Path("/ticket/misTickets")
 	@Produces(MediaType.APPLICATION_JSON)
 	@PreAuthorize("hasRole('ROLE_USER')")
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	Response misTickets();
 
 	@POST

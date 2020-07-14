@@ -71,14 +71,5 @@ public class Configuracion extends WebSecurityConfigurerAdapter {
 			.antMatchers("/insumos/ticket/areas").permitAll()
 			.anyRequest().authenticated();
 	}
-	
-	@Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST","PUT", "DELETE");
-            }
-        };
-    }
+
 }
