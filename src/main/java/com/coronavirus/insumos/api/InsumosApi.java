@@ -19,7 +19,6 @@ import com.coronavirus.insumos.dto.RechazarTicketRequest;
 import com.coronavirus.insumos.modelo.Usuario;
 
 @Path("insumos")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public interface InsumosApi {
 
 	@GET
@@ -51,7 +50,6 @@ public interface InsumosApi {
 	@Path("/ticket/misTickets")
 	@Produces(MediaType.APPLICATION_JSON)
 	@PreAuthorize("hasRole('ROLE_USER')")
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	Response misTickets();
 
 	@POST
