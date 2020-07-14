@@ -8,6 +8,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.coronavirus.insumos.dto.AprobarTicketRequest;
@@ -18,6 +19,15 @@ import com.coronavirus.insumos.dto.RechazarTicketRequest;
 import com.coronavirus.insumos.modelo.Usuario;
 
 @Path("insumos")
+@CrossOriginResourceSharing(allowAllOrigins = true, allowCredentials = true, 
+exposeHeaders = {"Access-Control-Allow-Headers",
+	        "Origin", "Content-Type", "X-Requested-With", "accept", 
+	        "Access-Control-Request-Method", "Access-Control-Request-Headers", 
+	        "Authorization"},
+allowHeaders = {"Access-Control-Allow-Headers",
+	        "Origin", "Content-Type", "X-Requested-With", "accept", 
+	        "Access-Control-Request-Method", "Access-Control-Request-Headers", 
+	        "Authorization"})
 public interface InsumosApi {
 
 	@GET
