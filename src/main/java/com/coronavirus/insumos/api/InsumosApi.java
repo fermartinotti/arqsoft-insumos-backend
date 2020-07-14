@@ -59,7 +59,7 @@ public interface InsumosApi {
 	
 	@GET
 	@Path("/ticket/areas")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@Produces(MediaType.APPLICATION_JSON)
 	Response obtenerAreas();
 	
